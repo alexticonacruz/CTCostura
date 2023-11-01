@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using SistemaCos_001.ViewModels
+@model StockViewModel
+<form asp-action="Agregar" enctype="multipart/form-data" method="post" role="form">
+    
+   
+    <div class="form-group">
+        <label asp-for="newStock.cantidad"></label>
+        <input asp-for="newStock.cantidad" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="newStock.precioMenor"></label>
+        <input asp-for="newStock.precioMenor" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="newStock.precioMayor"></label>
+        <input asp-for="newStock.precioMayor" class="form-control" />
+    </div>
+   
+   
+
+    <div class="form-group">
+        <label asp-for="newStock.productoId"></label>
+        <select asp-for="newStock.productoId" class="form-control">
+            <option value="">Seleccionar un producto para agregar STOCK</option>
+            @foreach (var producto in Model.listProductos)
+            {
+                <option value="@producto.productoId">@producto.modelo</option>
+            }
+        </select>
+        <input id="estado" type="checkbox" asp-for="newStock.estado" checked />
+
+    </div>
+    <button type="submit" class="btn btn-primary">Agregar</button>
+</form>

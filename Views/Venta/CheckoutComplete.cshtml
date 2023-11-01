@@ -1,0 +1,29 @@
+﻿<h1>ID de la transaccion <br />
+    @ViewBag.idTransaccion
+</h1>
+<h3 class="my-5">
+    Ahora puedes tambien enviar tu orden por whatsapp
+
+</h3>
+<label id="Detalle"> ID Transaccion @ViewBag.idTransaccion <br /> @ViewBag.CheckoutCompleteMessage</label>
+<label id="numero">@ViewBag.numero</label>
+<a id="whatsappLink" href="#">Enviar mensaje por WhatsApp</a>
+
+<script>
+    var detalle = document.getElementById('Detalle');
+    var detalleOrden = detalle.textContent;
+    var number = document.getElementById('numero');
+    var numberPerson = number.textContent;
+
+    var encodedMessage = encodeURIComponent(detalleOrden);
+    var link = "https://wa.me/73398111?text=" + encodedMessage;
+    document.getElementById("whatsappLink").href = link;
+</script>
+<style>
+    #Detalle {
+        display: none;
+    }
+    #numero{
+        display:none;
+    }
+</style>

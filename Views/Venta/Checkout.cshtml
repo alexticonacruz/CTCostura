@@ -1,0 +1,57 @@
+﻿@model Venta
+
+<form asp-action="Checkout" method="post" role="form">
+    <h3 class="my-5">
+        You're just one step away from your delicious pies.
+    </h3>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="col-6">
+        <div class="row g-2">
+            <div class="col-12">
+                <label asp-for="clienteId" class="form-label"></label>
+                <input asp-for="clienteId" class="form-control" />
+                <span asp-validation-for="clienteId" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="tipoPago" class="form-label"></label>
+                <input asp-for="tipoPago" class="form-control" />
+                <span asp-validation-for="tipoPago" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="observaciones" class="form-label"></label>
+                <input asp-for="observaciones" class="form-control" />
+                <span asp-validation-for="observaciones" class="text-danger"></span>
+            </div>
+
+            
+
+            <div class="col-12">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="PhoneNumber" class="form-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="mt-2">
+            <div class="col-md-offset-2 col-md-5 botonS">
+                <input type="submit" class="btn btn-secondary" value="Complete order" />
+                
+            </div>
+        </div>
+        
+    </div>
+</form>
+<style>
+    .botonS{
+        margin:10px;
+    }
+</style>

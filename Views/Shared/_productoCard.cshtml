@@ -1,0 +1,25 @@
+﻿@model Producto
+
+
+<div class="tarjeta widget" data-categoria="@Model.categoriaId">
+    <div class="precioSpan">@Model.modelo Bs</div>
+    <div class="fondo">
+        <img src="~/imagenes/@Model.urlImagen" alt="">
+    </div>
+    <div class="texto">
+        <p>
+            <a class="textTarjeta" 
+               asp-controller="producto"
+               asp-action="Details"
+               asp-route-id="@Model.productoId">@Model.modelo
+           </a>
+        </p>
+        <p>Categoria : @Model.Categoria.nombre</p>
+        <a class="btnTarjeta" 
+           asp-controller="ShoppingCart"
+           asp-action="AddToShoppingCart"
+           asp-route-productoId="@Model.productoId"><i class="bi bi-cart3"></i> Comprar
+       </a>
+    </div>
+</div>
+

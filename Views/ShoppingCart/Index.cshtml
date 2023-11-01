@@ -1,0 +1,61 @@
+﻿@using SistemaCos_001.ViewModels
+@model ShoppingCartViewModel
+<h3 class="my-2 titulo-ShoppingCart">
+    Detalle de productos seleccionados
+
+</h3>
+<button class="btnModal" onclick="openModal()"><i class="bi bi-bag-check-fill"></i><div class="cantidadProductos"><p class="pContador">@ViewBag.Items</p></div></button>
+
+<div id="myModal" class="modal">
+    <div class="modal-content1">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Total</h2>
+        <p class="modalP">@Model.ShoppingCartTotal.ToString("c")</p>
+        <hr>
+        <a class="comprarShoppingModal" asp-controller="Paypal" asp-action="Index">Comprar</a>
+        
+
+    </div>
+</div>
+<a class="comprarShoppingModal" asp-controller="Paypal" asp-action="Index">Comprar</a>
+<div class="ContenedorShopping">
+    @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+    {
+        var imagen = line.Producto.productoId;
+        var objeto = Model.productos.FirstOrDefault(item => item.productoId == imagen);
+
+        <div class="detalleProducto">
+            <div class="imagenShopping">
+                <img src="~/imagenes/@objeto.urlImagen" alt="">
+            </div>
+            <div class="textoShopping">
+                <h3>@line.Producto.Producto.modelo</h3>
+                <p>Cantidad : @line.Amount<br>Precio Unitario : @line.Producto.precioMenor <br />Total: @Model.ShoppingCartTotal</p>
+            </div>
+        </div>
+    }
+
+    
+</div>
+
+<div class="text-center">
+    <div id="paypal-button-container"></div>
+</div>
+
+
+<script>
+    function openModal() {
+        var modal = document.getElementById("myModal");
+        modal.classList.add("show"); // Agregar la clase "show" para mostrar la ventana modal suavemente
+      }
+
+      function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.classList.remove("show"); // Quitar la clase "show" para cerrar la ventana modal suavemente
+      }
+
+      // Resto del código igual
+</script>
+
+
+

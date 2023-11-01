@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Categoria>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Categorias</h1>
+
+<p>
+    <a asp-action="CreateCategory">Create New Category</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr class="table-dark">
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr class="table-light">
+            <td>
+                @item.nombre
+            </td>
+            
+            <td>
+                <a asp-action="editar" asp-route-id="@item.categoriaId">Editar</a> |
+                    <a asp-action="detalle" asp-route-id="@item.categoriaId">Details</a> |
+                    <a asp-action="delete" asp-route-id="@item.categoriaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
