@@ -8,14 +8,16 @@ namespace SistemaCos_001.Controllers
     {
         private readonly ICategoriaRepository _categoryRepository;
         private readonly IProductoRepository _productoRepository;
-        public ProductoController(ICategoriaRepository categoryRepository, IProductoRepository productoRepository)
+        private readonly IStockRepository _stockRepository;
+        public ProductoController(ICategoriaRepository categoryRepository, IProductoRepository productoRepository, IStockRepository stockRepository)
         {
             _categoryRepository = categoryRepository;
             _productoRepository = productoRepository;
+            _stockRepository = stockRepository;
         }
         public IActionResult Index()
         {
-            ProductoListViewModel productos = new ProductoListViewModel(_categoryRepository.Categorias,_productoRepository.filtroDelete);
+            ProductoListViewModel productos = new ProductoListViewModel(_categoryRepository.Categorias,_productoRepository.filtroDelete, _stockRepository.GetStocks);
             //return View(_productoRepository.AllProductos);
             return View(productos);
         }
@@ -23,6 +25,12 @@ namespace SistemaCos_001.Controllers
         {
 
             return View(_categoryRepository.Categorias);
+        }
+        public IActionResult Catalogo()
+        {
+            ProductoListViewModel productos = new ProductoListViewModel(_categoryRepository.Categorias, _productoRepository.filtroDelete, _stockRepository.GetStocks);
+            //return View(_productoRepository.AllProductos);
+            return View(productos);
         }
         public IActionResult Agregar()
         {
@@ -47,7 +55,7 @@ namespace SistemaCos_001.Controllers
                 model.productoClass.urlImagen = fileName; // Guardamos el nombre de la imagen en el atributo imagen del modelo Producto
             }
             _productoRepository.CreateProducto(model.productoClass);
-            return RedirectToAction("Index", "Producto");
+            return RedirectToAction("Catalogo", "Producto");
             
         }
         public IActionResult delete(int id)
@@ -88,7 +96,7 @@ namespace SistemaCos_001.Controllers
                 currentCategory = _categoryRepository.Categorias.FirstOrDefault(c => c.nombre == category)?.nombre;
             }
 
-            return View(new ProductoListViewModel(_categoryRepository.Categorias, productos));
+            return View(new ProductoListViewModel(_categoryRepository.Categorias, productos, _stockRepository.GetStocks));
         }
 
         public IActionResult Details(int id)

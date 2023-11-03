@@ -22,5 +22,20 @@ namespace SistemaCos_001.Models
         {
             return _cTCosturaDbContext.StocksDbSet.Where(p => p.Producto.modelo.Contains(searchQuery));
         }
+
+        public void UpdateStocks(List<ShoppingCartItem> StockITems)
+        {
+            foreach (ShoppingCartItem? shoppingCartItem in StockITems)
+            {
+                var objeto = _cTCosturaDbContext.StocksDbSet.FirstOrDefault(s => s.stockId == shoppingCartItem.Producto.stockId);
+                if (objeto != null)
+                {
+                    objeto.cantidad = objeto.cantidad - shoppingCartItem.Amount;
+                    _cTCosturaDbContext.StocksDbSet.Update(objeto);
+                    
+                }
+            }
+            _cTCosturaDbContext.SaveChanges();
+        }
     }
 }

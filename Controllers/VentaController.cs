@@ -10,12 +10,14 @@ namespace SistemaCos_001.Controllers
         private readonly IVentaRepository _ventaRepository;
         private readonly IShoppingCart _shoppingCart;
         private readonly IProductoRepository _productoRepository;
+        private readonly IStockRepository _stockRepository;
 
-        public VentaController(IVentaRepository ventaRepository, IShoppingCart shoppingCart, IProductoRepository productoRepository)
+        public VentaController(IVentaRepository ventaRepository, IShoppingCart shoppingCart, IProductoRepository productoRepository, IStockRepository stockRepository)
         {
             _ventaRepository = ventaRepository;
             _shoppingCart = shoppingCart;
             _productoRepository = productoRepository;
+            _stockRepository = stockRepository;
         }
 
         public IActionResult Checkout()//GET, default.
@@ -38,6 +40,7 @@ namespace SistemaCos_001.Controllers
             if (ModelState.IsValid)
             {
                 _ventaRepository.CreateOrder(venta);
+                _stockRepository.UpdateStocks(_shoppingCart.ShoppingCartItems);
                 string texto = _ventaRepository.detalleOrden(venta, _productoRepository.AllProductos);
                 string number = venta.PhoneNumber;
                 _ventaRepository.correoSend(texto, venta.Email);
@@ -55,5 +58,7 @@ namespace SistemaCos_001.Controllers
             ViewBag.idTransaccion = informacion;
             return View();
         }
+
+        
     }
 }

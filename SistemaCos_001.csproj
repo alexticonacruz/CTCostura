@@ -23,4 +23,10 @@
     <Folder Include="wwwroot\imagenes\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\css\tarjeta.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

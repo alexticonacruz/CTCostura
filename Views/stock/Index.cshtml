@@ -10,6 +10,9 @@
     <thead>
         <tr class="table-dark">
             <th>
+                Lote
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Producto.modelo)
             </th>
             <th>
@@ -35,6 +38,9 @@
         @foreach (var item in Model)
         {
             <tr class="table-light">
+                <td>
+                    @item.stockId
+                </td>
                 <td>
                     @item.Producto.modelo
                 </td>

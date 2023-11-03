@@ -2,6 +2,7 @@
 using System.Net;
 //using Microsoft.Identity.Client;
 using SistemaCos_001.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SistemaCos_001.Models
 {
@@ -42,6 +43,7 @@ namespace SistemaCos_001.Models
 
             _cTCosturaDbContext.SaveChanges();
         }
+        
         public string detalleOrden (Venta venta, IEnumerable<Producto> produtosList) 
         {
             string nombre = "Lista de productos Comprados\n-----------------------------------";
@@ -87,6 +89,81 @@ namespace SistemaCos_001.Models
             {
                 Console.WriteLine("Error al enviar el correo: " + ex.Message);
             }
+        }
+        public List<string> ventasActual()
+        {
+            // Obtiene la fecha actual
+            DateTime fechaActual = DateTime.Now;
+
+            // Obtiene el mes y el año del mes actual
+            int mesActual = fechaActual.Month;
+            int anioActual = fechaActual.Year;
+
+            // Obtiene el mes y el año del mes anterior
+            int mesAnterior = mesActual - 1;
+            int anioAnterior = anioActual;
+
+            if (mesAnterior == 0) // Maneja el caso de diciembre, donde el mes anterior es noviembre del año anterior
+            {
+                mesAnterior = 12;
+                anioAnterior--;
+            }
+
+            DateTime now = DateTime.Now;
+            string nombreDelMes = now.ToString("MMMM");
+
+            DateTime fechaEspecifica = new DateTime(anioAnterior, mesAnterior, 1); // Puedes usar la fecha que desees
+            string nombreDelMesAnterior = fechaEspecifica.ToString("MMMM");
+
+
+            // Realiza una consulta LINQ para sumar el Total de las ventas del mes actual
+            var ventasMesActual = _cTCosturaDbContext.VentasDbSet
+                .Where(venta => venta.fecha.Month == mesActual && venta.fecha.Year == anioActual)
+                .ToList();
+
+            decimal totalVentasMesActual = ventasMesActual.Sum(venta => venta.total);
+
+            // Realiza una consulta LINQ para sumar el Total de las ventas del mes anterior
+            var ventasMesAnterior = _cTCosturaDbContext.VentasDbSet
+                .Where(venta => venta.fecha.Month == mesAnterior && venta.fecha.Year == anioAnterior)
+                .ToList();
+
+            decimal totalVentasMesAnterior = ventasMesAnterior.Sum(venta => venta.total);
+
+            // Obtén la fecha de inicio y fin del mes actual
+            DateTime fechaInicioMes = new DateTime(anioActual, mesActual, 1);
+            DateTime fechaFinMes = fechaInicioMes.AddMonths(1).AddDays(-1);
+
+            // Realiza la consulta para contar las ventas en el mes actual
+            int ventasEnMesActual = _cTCosturaDbContext.VentasDbSet
+                .Where(venta => venta.fecha >= fechaInicioMes && venta.fecha <= fechaFinMes)
+                .Count();
+
+            // Obtén la fecha de inicio y fin del mes anterior
+            //DateTime fechaInicioMesAnterior = new DateTime(anioAnterior, mesAnterior, 1);
+            //DateTime fechaFinMesAnterior = fechaInicioMesAnterior.AddMonths(1).AddDays(-1);
+
+            DateTime fechaInicioMesAnterior = new DateTime(anioAnterior, mesAnterior, 1);
+            DateTime fechaFinMesAnterior = fechaInicioMesAnterior.AddMonths(1).AddSeconds(-1);
+
+
+            // Realiza la consulta para contar las ventas en el mes anterior
+            int ventasEnMesAnterior = _cTCosturaDbContext.VentasDbSet
+                .Where(venta => venta.fecha >= fechaInicioMesAnterior && venta.fecha <= fechaFinMesAnterior)
+                .Count();
+
+            List<string> result = new List<string>();
+            result.Add(nombreDelMes.ToString()); // Mes actual en cadena
+            result.Add(ventasEnMesActual.ToString()); // N ventas en el mes actual
+            result.Add(totalVentasMesActual.ToString()); // Dinero ganado este mes
+
+
+            result.Add(nombreDelMesAnterior.ToString()); // Mes anterior en cadena
+            result.Add(ventasEnMesAnterior.ToString()); // N ventas en el mes anterior
+            result.Add(totalVentasMesAnterior.ToString()); // Dinero ganado el mes anterior
+            
+
+            return result;
         }
     }
 }

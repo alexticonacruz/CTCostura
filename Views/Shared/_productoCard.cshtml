@@ -1,25 +1,30 @@
 ﻿@model Producto
 
 
-<div class="tarjeta widget" data-categoria="@Model.categoriaId">
-    <div class="precioSpan">@Model.modelo Bs</div>
-    <div class="fondo">
-        <img src="~/imagenes/@Model.urlImagen" alt="">
+    <div class="icon">
+        <a href="">@Model.talla</a>
+        <a href=""><i class="bi bi-cart3"></i></a>
+        <a href=""><i class="bi bi-share"></i></a>
     </div>
+    <picture>
+        <img class="foto" src="~/imagenes/@Model.urlImagen" alt="">
+    </picture>
     <div class="texto">
-        <p>
-            <a class="textTarjeta" 
-               asp-controller="producto"
-               asp-action="Details"
-               asp-route-id="@Model.productoId">@Model.modelo
-           </a>
+        <h4>@Model.modelo</h4>
+        <p class="truncate-text">
+            Este es un texto que se mostrará en un máximo de 2 líneas antes de truncar el contenido si es
+            demasiado largo.
         </p>
-        <p>Categoria : @Model.Categoria.nombre</p>
-        <a class="btnTarjeta" 
-           asp-controller="ShoppingCart"
-           asp-action="AddToShoppingCart"
-           asp-route-productoId="@Model.productoId"><i class="bi bi-cart3"></i> Comprar
-       </a>
-    </div>
-</div>
+        <div class="botones">
+            <a  asp-controller="ShoppingCart"
+               asp-action="AddToShoppingCart"
+               asp-route-productoId="@Model.productoId"
+               class="aComprar"><i class="bi bi-cash-coin"></i> Comprar</a>
 
+            <a asp-controller="ShoppingCart"
+               asp-action="AddToShoppingCart"
+               asp-route-productoId="@Model.productoId"
+               class="aCarrito"><i class="bi bi-cart3"></i> Agregar</a>
+
+        </div>
+    </div>

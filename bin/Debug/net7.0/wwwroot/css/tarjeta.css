@@ -1,0 +1,153 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Poppins', sans-serif !important;
+}
+h1,h4{
+    color: indigo !important;
+}
+main{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: azure;
+}
+a{
+    text-decoration: none !important;
+}
+.botones{
+    width: 90%;
+    margin: 0 5%;
+    display: flex;
+    justify-content: space-between;
+}
+.botones a{
+    padding: 7.5px;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
+}
+.aComprar{
+    width: 122px !important;
+    background-color: indigo;
+    color: aliceblue;
+}
+.aCarrito{
+    width: 122px !important;
+    background-color: aliceblue;
+    border: 1px solid indigo;
+    color: indigo;
+}
+
+.aCarrito:hover{
+    box-shadow: 0 0 20px rgba(123, 5, 208, 0.649);
+}
+.aComprar:hover{
+    box-shadow: 0 0 20px rgba(123, 5, 208, 0.649);
+}
+.tarjeta{
+    width: 300px;
+    height: 330px;
+    background-color: rgba(153, 50, 204, 0.495);
+    margin: 10px;
+    position: relative;
+    border-radius: 24px;
+    box-shadow: 0 0 40px rgba(128, 128, 128, 0.713);
+}
+picture{
+    display: flex;
+    justify-content: center;
+}
+.foto{
+    width: 300px;
+    height: 330px;
+    vertical-align: center;
+    transition: all 0.7s ease-in-out ;
+    filter: drop-shadow(0 0 15px black);
+}
+.texto{
+    width: 100%;
+    display: none;
+}
+.texto >h4,p{
+    margin-left:15px ;
+    margin-right: 15px;
+}
+.tarjeta:hover{
+    height: 350px;
+}
+.tarjeta:hover .foto{
+    width: 250px;
+    height: 250px;
+    cursor: pointer;
+    transform: translateY(-50px);
+}
+.tarjeta:hover .texto{
+    display: block;
+    background-color: aliceblue;
+    border-radius: 0 0 24px 24px;
+    transform: translateY(-50px);
+    animation: visi 0.7s ease forwards;
+    height: 151px !important;
+
+}
+@keyframes visi{
+    from{
+        opacity: 0;
+        height: 0;
+    }
+    to{
+        opacity: 1;
+        height: 116px;
+
+    }
+}
+.icon{
+    position: absolute;
+    top: 55px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    z-index: 1;
+}
+.icon a{
+    display: inline-block;
+    width: 35px;
+    height:35px;
+    margin: 5px 0;
+    padding: 5px;
+    background-color: aliceblue;
+    border-radius: 50%;
+    color: blueviolet;
+}
+.icon a:hover{
+    box-shadow: 0 0 20px blueviolet;
+    animation: move 1s ease 1  alternate;
+}
+@keyframes move{
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.precio{
+    position: absolute;
+    top: 10px;
+    color: indigo;
+}
+.texto > p{
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+
+
+/* Establece un alto fijo para mostrar solo dos líneas */
+.truncate-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* Número de líneas a mostrar */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

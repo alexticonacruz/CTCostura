@@ -34,7 +34,6 @@ namespace SistemasWeb01.Controllers
         public RedirectToActionResult AddToShoppingCart(int productoId)
         {
             var selectedProducto = _stockRepository.GetStocks.FirstOrDefault(s => s.stockId == productoId);
-            //var selectedPie = _pieRepository.AllPies.FirstOrDefault(p => p.PieId == productoId);
 
             if (selectedProducto != null)
             {
