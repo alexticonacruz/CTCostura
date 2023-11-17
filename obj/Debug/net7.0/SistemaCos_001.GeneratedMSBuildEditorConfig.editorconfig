@@ -84,6 +84,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5cGFsXFN1Y2Nlc3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/alex/Desktop/visual/SistemaCos_001/Views/Pedido/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVkaWRvXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/alex/Desktop/visual/SistemaCos_001/Views/Producto/Agregar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdG9cQWdyZWdhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -130,6 +134,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/alex/Desktop/visual/SistemaCos_001/Views/stock/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3Ncc3RvY2tcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex/Desktop/visual/SistemaCos_001/Views/stock/ultimos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3Ncc3RvY2tcdWx0aW1vcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/alex/Desktop/visual/SistemaCos_001/Views/Venta/Checkout.cshtml]

@@ -263,3 +263,5 @@ C:\Users\alex\Desktop\visual\SistemaCos_001\bin\Debug\net7.0\runtimes\win\lib\ne
 C:\Users\alex\Desktop\visual\SistemaCos_001\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\alex\Desktop\visual\SistemaCos_001\obj\Debug\net7.0\SistemaCos_001.csproj.CopyComplete
 C:\Users\alex\Desktop\visual\SistemaCos_001\bin\Debug\net7.0\wwwroot\css\tarjeta.css
+C:\Users\alex\Desktop\visual\SistemaCos_001\bin\Debug\net7.0\wwwroot\css\pedido.css
+C:\Users\alex\Desktop\visual\SistemaCos_001\bin\Debug\net7.0\wwwroot\js\script.js

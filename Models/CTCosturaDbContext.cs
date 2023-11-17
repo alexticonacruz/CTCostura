@@ -16,6 +16,8 @@ namespace SistemaCos_001.Models
         public DbSet<Categoria> CategoriasDbSet { get; set; }
         public DbSet<stock> StocksDbSet { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCartItemsDbSet { get; set; }
+        public DbSet<Pedido> pedidosDbSet { get; set; }
+        public DbSet<DetallePedido> detallePedidosDbSet { get; set; }
 
     }
 }

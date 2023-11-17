@@ -38,5 +38,10 @@ namespace SistemaCos_001.Controllers
             return RedirectToAction("Index", "stock");
 
         }
+        public IActionResult ultimos()
+        {
+            var newStock = _stockRepository.Ultimos();
+            return View(newStock);
+        }
     }
 }

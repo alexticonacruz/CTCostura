@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/tarjeta.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SistemaCos_001.styles.css" asp-append-version="true" />
+    <!-- Para cargar un archivo JavaScript externo -->
+    <script src="~/js/script.js" asp-append-version="true"></script>
+
+    <link rel="stylesheet" href="~/css/pedido.css" asp-append-version="true" />
     @*libreria de estadisticas*@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -69,6 +73,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Estadistica" asp-action="Index">Estadisticas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="stock" asp-action="ultimos">ultimo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="Index">Pedido</a>
                         </li>
                     </ul>
                 </div>

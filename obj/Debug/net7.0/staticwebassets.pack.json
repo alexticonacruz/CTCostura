@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\SistemaCos_001.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\css\\pedido.css",
+      "PackagePath": "staticwebassets\\css\\pedido.css"
+    },
+    {
       "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -15,6 +19,10 @@
     {
       "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\im\\chris.jpg",
+      "PackagePath": "staticwebassets\\im\\chris.jpg"
     },
     {
       "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\imagenes\\cnvfa22wtee2-035.jpg",
@@ -31,6 +39,10 @@
     {
       "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\imagenes\\polera hombre copia.png",
       "PackagePath": "staticwebassets\\imagenes\\polera hombre copia.png"
+    },
+    {
+      "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\js\\script.js",
+      "PackagePath": "staticwebassets\\js\\script.js"
     },
     {
       "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\js\\site.js",

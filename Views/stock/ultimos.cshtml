@@ -1,0 +1,64 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<stock>
+<table class="table table-hover">
+    <thead>
+        <tr class="table-dark">
+            <th>
+                Lote
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.precioMayor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.precioMenor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-light">
+                <td>
+                    @item.stockId
+                </td>
+                
+                <td>
+                    @item.cantidad
+                </td>
+                <td>
+                    @item.precioMayor
+                </td>
+                <td>
+                    @item.precioMenor
+                </td>
+                <td>
+                    @item.fecha
+                </td>
+                <td>
+                    @item.estado
+                </td>
+                @*<td>
+            <a asp-action="editar" asp-route-id="@item.categoriaId">Editar</a> |
+            <a asp-action="detalle" asp-route-id="@item.categoriaId">Details</a> |
+            <a asp-action="delete" asp-route-id="@item.categoriaId">Delete</a>
+            </td>*@
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,325 @@
+﻿/* Estilo inicial del contenedor */
+.contenedor {
+    background-color: #ccc;
+    /* Otros estilos iniciales */
+}
+
+    /* Estilo cuando el contenedor está activado mediante JavaScript */
+    .contenedor.activo {
+        background-color: #ff0000;
+        /* Cambiar el color de fondo cuando está activo */
+        /* Otros estilos cuando está activo */
+    }
+
+/* aqui viene lo chido*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+}
+
+.camisa {
+    margin-top: 50px;
+    margin-left: 150px;
+    width: 200px;
+    height: 300px;
+    background-color: #3498db;
+    /* Color de fondo de la camisa */
+    position: relative;
+    opacity: 0;
+    border-radius: 40px 40px 10px 10px;
+}
+
+.cuello {
+    width: 60px;
+    height: 30px;
+    background-color: #ffffff;
+    /* Color del cuello */
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0 0 50% 50%;
+}
+
+.cuerpo {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.manga {
+    width: 70px;
+    height: 150px;
+    background-color: #3498db;
+    /* Color de la manga */
+    position: absolute;
+    top: 0;
+}
+
+    .manga:nth-child(1) {
+        left: -20px;
+        top: -12px;
+        left: -30px;
+        rotate: 50deg;
+        border-radius: 45px 45px 15px 15px;
+    }
+
+    .manga:nth-child(2) {
+        right: -20px;
+        top: -12px;
+        right: -30px;
+        rotate: -50deg;
+        border-radius: 45px 45px 15px 15px;
+    }
+
+.textoS {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    color: aliceblue;
+    width: 180px;
+    height: 210px;
+    position: absolute;
+    top: 27%;
+    left: 10px;
+    background-color: rgba(170, 0, 255, 0.599);
+    background-image: linear-gradient(-45deg, rgba(255, 0, 0, 0.346), rgba(0, 0, 255, 0.38));
+    border-radius: 50px 50px 7px 7px;
+}
+
+.textoS input{
+    width:60px !important;
+
+}
+.precioS {
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    justify-items:center;
+    align-content:center ;
+    height: 40px;
+    width: 160px;
+    font-size: 16px;
+    background-color: #f4f4f4;
+    border-radius: 3px;
+}
+
+#precioS {
+    width: 70px;
+    height: 30px;
+    border: none;
+    margin-top: 3px;
+}
+
+.precioS p {
+    margin-top: 7px;
+    margin-left: 5px;
+    color: rgba(0, 0, 0, 0.681);
+}
+
+input {
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    background-color: transparent;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+
+.cantidadS {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    height: 40px;
+    width: 160px;
+    font-size: 16px;
+    background-color: #f4f4f4;
+    border-radius: 3px;
+}
+.cantidadS p{
+    margin-right:0;
+}
+
+#cantidadS {
+    width: 70px;
+    height: 30px;
+    border: none;
+    margin-top: 3px;
+}
+
+.cantidadS p {
+    margin-top: 7px;
+    margin-left: 5px;
+    color: rgba(0, 0, 0, 0.681);
+}
+
+/* foto */
+
+#fotos {
+    background-color: #3498db;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    border: #3498db 3px solid;
+    &:hover
+
+{
+    transform: scale(1.5);
+    transition: transform 0.7s ease;
+    /* Transición más lenta en hover */
+}
+
+transition: transform 1s ease;
+/* Transición más lenta en hover */
+
+}
+
+.fotoP {
+    /* background-color: aqua; */
+    width: 200px;
+    height: 200px;
+    position: relative;
+    border-radius: 10px;
+    transition: background-color 2s, width 0.5s, height 0.5s;
+    /* Transiciones suaves */
+    & img
+
+{
+    cursor: pointer;
+}
+
+}
+
+.fotoP.activo {
+    background-color: rebeccapurple;
+    background-image: linear-gradient(-45deg, rgba(255, 0, 0, 0.213), rgba(0, 0, 255, 0.213), rgba(0, 0, 255, 0.556));
+    width: 400px;
+    height: 300px;
+    transition: background-color 2s, width 0.5s, height 0.5s;
+    /* Transiciones suaves */
+    border-radius: 10px;
+    & #fotos
+
+{
+    &:hover
+
+{
+    cursor: pointer;
+    transform: scale(1);
+}
+
+}
+}
+
+#fotos.activo + .camisa {
+    animation: animacionFoto 2s forwards;
+    opacity: 1;
+    position: absolute;
+    top: -17%;
+    left: 0;
+    z-index: 1;
+}
+
+#fotoA {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+
+
+/* .foto:hover+.camisa {
+    display: block;
+    cursor: pointer;
+    translate: 50px 50px;
+    opacity: 0;
+    animation: animacionFoto 2s infinite;
+} */
+
+/* .foto :hover .camisa{
+    cursor: pointer;
+    top: 40px;
+    translate: 50px 50px;
+    animation: animacionFoto 3s forwards;
+} */
+@keyframes animacionFoto {
+    0% {
+    }
+
+    100% {
+        transform: translateX(50%);
+        opacity: 1;
+    }
+}
+
+.tarjetaContenedor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+    width: 100%;
+    background-color: aliceblue;
+    padding: 10px;
+    overflow: hidden;
+}
+
+footer {
+    background-color: #3498db;
+}
+
+#btnDetalle {
+    margin-top: 8px;
+    width: 89%;
+}
+
+
+/* Estilos para la tabla */
+#tablaProductos {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+    #tablaProductos th,
+    #tablaProductos td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #tablaProductos th {
+        background-color: #f2f2f2;
+    }
+
+/* Botón de agregar a la tabla */
+.btnAgregar {
+    background-color: #4caf50;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Estilos adicionales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+button {
+    cursor: pointer;
+}

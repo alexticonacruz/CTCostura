@@ -37,5 +37,32 @@ namespace SistemaCos_001.Models
             }
             _cTCosturaDbContext.SaveChanges();
         }
+        //public IEnumerable<stock> Ultimos()
+        //{
+        //    var stockMasRecientePorProducto = _cTCosturaDbContext.StocksDbSet
+        //        .GroupBy(s => s.productoId)
+        //        .Select(group => group.OrderByDescending(s => s.fecha).First())
+        //        .Select(s => new stock
+        //        {
+        //            productoId = s.productoId,
+        //            stockId = s.stockId,
+        //            precioMayor = s.precioMayor
+        //        })
+        //        .ToList();
+
+        //    return stockMasRecientePorProducto;
+        //}
+        public IEnumerable<stock> Ultimos()
+        {
+            var stockMasRecientePorProducto = _cTCosturaDbContext.StocksDbSet
+                .Where(s => s.fecha == _cTCosturaDbContext.StocksDbSet
+                    .Where(inner => inner.productoId == s.productoId)
+                    .Max(inner => inner.fecha))
+                .ToList();
+
+            return stockMasRecientePorProducto;
+        }
+
+
     }
 }

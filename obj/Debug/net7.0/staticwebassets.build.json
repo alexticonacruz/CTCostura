@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zCXsRdztWJyiMS4nGWAUor60HsxuzcskVgQcRZBzPC4=",
+  "Hash": "SxHCP8KmShCphU330NIHJecWSNWCi2HIUSeJ8UD9d4Q=",
   "Source": "SistemaCos_001",
   "BasePath": "_content/SistemaCos_001",
   "Mode": "Default",
@@ -1071,6 +1071,23 @@
       "OriginalItemSpec": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\SistemaCos_001.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\css\\pedido.css",
+      "SourceId": "SistemaCos_001",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\",
+      "BasePath": "_content/SistemaCos_001",
+      "RelativePath": "css/pedido.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Always",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\pedido.css"
+    },
+    {
       "Identity": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\css\\site.css",
       "SourceId": "SistemaCos_001",
       "SourceType": "Discovered",
@@ -1120,6 +1137,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\im\\chris.jpg",
+      "SourceId": "SistemaCos_001",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\",
+      "BasePath": "_content/SistemaCos_001",
+      "RelativePath": "im/chris.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\im\\chris.jpg"
     },
     {
       "Identity": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\imagenes\\cnvfa22wtee2-035.jpg",
@@ -1188,6 +1222,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\imagenes\\polera hombre copia.png"
+    },
+    {
+      "Identity": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\js\\script.js",
+      "SourceId": "SistemaCos_001",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\",
+      "BasePath": "_content/SistemaCos_001",
+      "RelativePath": "js/script.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Always",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\script.js"
     },
     {
       "Identity": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\js\\site.js",

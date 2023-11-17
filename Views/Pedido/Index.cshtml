@@ -1,0 +1,206 @@
+﻿
+@using SistemaCos_001.ViewModels;
+@model PedidoViewModel;
+<form asp-action="Agregar" id="formularioStock" enctype="multipart/form-data" method="post" role="form">
+    <input type="datetime-local" id="fechaInput" onchange="obtenerFecha()">
+    <script>
+        function obtenerFecha() {
+            const input = document.getElementById('fechaInput');
+            const fechaSeleccionada = new Date(input.value);
+
+            const año = fechaSeleccionada.getFullYear();
+            const mes = ('0' + (fechaSeleccionada.getMonth() + 1)).slice(-2);
+            const dia = ('0' + fechaSeleccionada.getDate()).slice(-2);
+            const hora = ('0' + fechaSeleccionada.getHours()).slice(-2);
+
+            const fechaFormateada = `${año}-${mes}-${dia} ${hora}:00:00`;
+            console.log('Fecha seleccionada:', fechaFormateada);
+            // Realiza cualquier acción con la fecha formateada aquí
+        }
+    </script>
+    <input asp-for="newPedido.jsonCadena" class="form-control" id="listaObjetos" />
+    @*<input type="hidden" id="listaObjetos" name="@Model.newPedido.jsonCadena" />*@
+    <button type="button" onclick="enviarFormulario()">Enviar Datos</button>
+
+</form>
+<div class="tarjetaContenedor">
+    @foreach (var producto in Model.productos)
+    {
+        <div class="fotoP">
+            <div id="fotos" onclick="activarDetalle(this)">
+                <picture>
+                    <img id="fotoA" src="~/imagenes/@producto.urlImagen" alt="">
+                </picture>
+
+            </div>
+            <div class="camisa">
+                <div class="cuello"></div>
+                <div class="cuerpo">
+
+                    <div class="manga"></div>
+                    <div class="manga"></div>
+
+                    <div class="textoS">
+                        <h2>Damaris @producto.productoId</h2>
+                        <p id="productoId" style="display: none;">1</p>
+                        <div class="precioS">
+                            <p id="id" style="display: none;">@producto.productoId</p>
+                            <p>Precio :</p>
+                            <input type="number" id="precioS" placeholder="50">
+
+                        </div>
+                        <div class="cantidadS">
+                            <p>Cantidad :</p>
+                            <input type="number" id="cantidadS" placeholder="5">
+
+                        </div>
+
+                        <button class="btn btn-primary" id="btnDetalle"
+                                onclick="agregarDesdeTarjeta(this.parentElement)">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    
+
+
+</div>
+@*<button class="btn btn-primary" onclick="enviarTabla()">Enviar al Controlador</button>*@
+
+<h2>Tabla de Productos</h2>
+
+<!-- Tabla para mostrar los productos agregados -->
+<table id="tablaProductos">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody id="cuerpoTabla">
+        <!-- Aquí se agregarán las filas de productos -->
+    </tbody>
+</table>
+
+
+<footer>Propiedad ENKI</footer>
+
+<script>
+    function agregarDesdeTarjeta(tarjeta) {
+        var da = tarjeta.querySelector("#cantidadS"); //obtiene la etiqueta
+        var cantidad = da.value;
+        var da2 = tarjeta.querySelector("#precioS");
+        var precios = da2.value;
+        var daI = tarjeta.querySelector("#id").innerHTML;
+
+        console.log("precio : " + precios + " cantidad :" + cantidad + "id" + daI);
+
+        
+        agregarProducto(cantidad, precios, daI);
+        da.value = "";
+        da2.value = "";
+    }
+
+    // Función para agregar un producto a la tabla
+    function agregarProducto(cantidad, precio, id) {
+        console.log(id + " entró al método");
+
+        var cuerpoTabla = document.getElementById("cuerpoTabla");
+        var filas = cuerpoTabla.getElementsByTagName("tr");
+        var filaExistente = null;
+
+        for (var i = 0; i < filas.length; i++) {
+            var celdas = filas[i].getElementsByTagName("td");
+            var idEnFila = celdas[0].textContent;
+
+            if (idEnFila === id) {
+                filaExistente = filas[i];
+                break;
+            }
+        }
+
+        if (filaExistente) {
+            actualizarFilaExistente(filaExistente, cantidad, precio);
+        } else {
+            agregarNuevaFila(cuerpoTabla, id, cantidad, precio);
+        }
+    }
+
+    function actualizarFilaExistente(fila, cantidad, precio) {
+        var celdas = fila.getElementsByTagName("td");
+        celdas[2].textContent = precio;
+        celdas[3].textContent = cantidad;
+        var total = parseInt(cantidad) * parseInt(precio);
+        celdas[4].textContent = total;
+    }
+
+    function agregarNuevaFila(cuerpoTabla, id, cantidad, precio) {
+        var nuevaFila = document.createElement("tr");
+
+        crearYAgregarCelda(nuevaFila, id);
+        crearYAgregarCelda(nuevaFila, "Nombre del producto");
+        crearYAgregarCelda(nuevaFila, precio);
+        crearYAgregarCelda(nuevaFila, cantidad);
+        var total = parseInt(cantidad) * parseInt(precio);
+        crearYAgregarCelda(nuevaFila, total);
+
+        cuerpoTabla.appendChild(nuevaFila);
+    }
+
+    function crearYAgregarCelda(fila, contenido) {
+        var celda = document.createElement("td");
+        celda.textContent = contenido;
+        fila.appendChild(celda);
+    }
+
+    function obtenerDatosTablaComoJson() {
+        var tabla = document.getElementById("tablaProductos");
+        var filas = tabla.getElementsByTagName("tr");
+        var datos = [];
+
+        for (var i = 1; i < filas.length; i++) { // Empezamos desde 1 para omitir el encabezado
+            var celdas = filas[i].getElementsByTagName("td");
+            var objeto = {
+                id: celdas[0].textContent,
+                nombre: celdas[1].textContent,
+                precio: celdas[2].textContent,
+                cantidad: celdas[3].textContent,
+                total: celdas[4].textContent
+                // Agrega otros atributos si los tienes en la tabla
+            };
+            datos.push(objeto);
+        }
+
+        return JSON.stringify(datos);
+    }
+
+
+    function enviarFormulario() {
+        var datosJson = JSON.stringify(obtenerDatosTablaComoJson());
+        document.getElementById("listaObjetos").value = datosJson;
+        document.getElementById("formularioStock").submit();
+    }
+    
+
+</script>
+@*<script>
+    const inputFecha = document.getElementById('fecha');
+
+    inputFecha.addEventListener('change', function (event) {
+        const fechaSeleccionada = new Date(event.target.value);
+        const fechaFormateada = `${fechaSeleccionada.getFullYear()}${padZero(fechaSeleccionada.getMonth() + 1)}${padZero(fechaSeleccionada.getDate())}`;
+        console.log('Fecha seleccionada formateada:', fechaFormateada);
+        // Realiza cualquier acción con la fecha formateada aquí
+    });
+
+    function padZero(num) {
+        return num < 10 ? `0${num}` : num;
+    }
+</script>*@
