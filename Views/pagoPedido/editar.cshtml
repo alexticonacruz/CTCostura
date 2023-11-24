@@ -3,7 +3,8 @@
 *@
 @{
 }
-@model Pedido
+@using SistemaCos_001.ViewModels
+@model pagoPedidoViewModel
 
 
 
@@ -15,26 +16,26 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
-                    <p><strong>Id del Pedido:</strong> @Model.pedidoId</p>
-                    <p><strong>Fecha:</strong> @Model.fecha</p>
-                    <p><strong>Monto:</strong> @Model.monto</p>
-                    <p><strong>Monto Total:</strong> @Model.montoTotal</p>
-                    <p><strong>Descuento:</strong> @Model.descuento</p>
+                    <p><strong>Id del Pedido:</strong> @Model.newPedido.pedidoId</p>
+                    <p><strong>Fecha:</strong> @Model.newPedido.fecha</p>
+                    <p><strong>Monto:</strong> @Model.newPedido.monto</p>
+                    <p><strong>Monto Total:</strong> @Model.newPedido.montoTotal</p>
+                    <p><strong>Descuento:</strong> @Model.newPedido.descuento</p>
                 </div>
                 <div class="col-md-6">
-                    <p><strong>Fecha de Entrega:</strong> @Model.fechaEntrega</p>
-                    <p><strong>Estado:</strong> @Model.estado</p>
-                    <p><strong>Cliente:</strong> @Model.Cliente?.name</p>
-                    <p><strong>Dirección:</strong> @Model.Cliente?.direccion</p>
-                    <p><strong>Número:</strong> @Model.Cliente?.number</p>
+                    <p><strong>Fecha de Entrega:</strong> @Model.newPedido.fechaEntrega</p>
+                    <p><strong>Estado:</strong> @Model.newPedido.estado</p>
+                    <p><strong>Cliente:</strong> @Model.newPedido.Cliente?.name</p>
+                    <p><strong>Dirección:</strong> @Model.newPedido.Cliente?.direccion</p>
+                    <p><strong>Número:</strong> @Model.newPedido.Cliente?.number</p>
                 </div>
             </div>
             <hr>
             <h5>Detalles del Pedido</h5>
-            @if (Model.DetallePedidos != null)
+            @if (Model.newPedido.DetallePedidos != null)
             {
                 <ul>
-                    @foreach (var detalle in Model.DetallePedidos)
+                    @foreach (var detalle in Model.newPedido.DetallePedidos)
                     {
                         <li> Modelo : @detalle.Producto.modelo Talla: @detalle.Producto.talla - Cantidad: @detalle.cantidad  -photo : <a href="~/imagenes/@detalle.Producto.urlImagen" target="_blank">Ver Imagen</a></li>
                     }
@@ -45,17 +46,43 @@
 </div>
 
 
-<form>
+<form asp-action="crear" method="post">
+    
+    <div class="form-group" style="display:none">
+        <label asp-for="pagoPedido.pedidoId" for="total">Total del Pedido</label>
+        <input asp-for="pagoPedido.pedidoId" type="number" class="form-control"  value="@Model.newPedido.pedidoId" readonly />
+    </div>
+
     <div class="form-group">
-        <label for="acuenta">Cantidad Dejada</label>
-        <input type="number" class="form-control" id="acuenta" />
+        <label asp-for="pagoPedido.acuenta" for="acuenta">Cantidad Dejada</label>
+        <input asp-for="pagoPedido.acuenta" type="number" class="form-control" id="acuenta" />
     </div>
     <div class="form-group">
-        <label for="saldo">Saldo</label>
-        <input type="number" class="form-control" id="saldo" readonly />
+        <label asp-for="pagoPedido.saldo" for="saldo">Saldo</label>
+        <input asp-for="pagoPedido.saldo" type="number" class="form-control" id="saldo" readonly />
     </div>
     <div class="form-group">
-        <label for="total">Total del Pedido</label>
-        <input type="number" class="form-control" id="total" value="@Model.montoTotal" readonly />
+        <label asp-for="pagoPedido.total" for="total">Total del Pedido</label>
+        <input asp-for="pagoPedido.total" type="number" class="form-control" id="total" value="@Convert.ToInt32(Model.newPedido.montoTotal)" readonly />
     </div>
+    <button class="btn btn-success">Guardar</button>
 </form>
+
+
+<script>
+    // Función para calcular el saldo
+    function calcularSaldo() {
+        const cantidadDejada = parseFloat(document.getElementById('acuenta').value);
+        const totalPedido = parseFloat(document.getElementById('total').value);
+        const saldo = totalPedido - cantidadDejada;
+
+        // Mostrar el saldo calculado en el campo correspondiente
+        document.getElementById('saldo').value = saldo.toFixed(2);
+    }
+
+    // Escuchar el evento 'input' en el campo 'acuenta' para calcular el saldo
+    document.getElementById('acuenta').addEventListener('input', calcularSaldo);
+
+    // Calcular el saldo al cargar la página (por si se establece una cantidad dejada inicial)
+    calcularSaldo();
+</script>

@@ -3,3 +3,43 @@
 *@
 @{
 }
+@model IEnumerable<pagoPedido>
+<div class="container">
+    <h1>Buscador de objetos</h1>
+    <input id="inputBusqueda" type="text" class="form-control" placeholder="Buscar por nombre" />
+
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>N° </th>
+                <th>Acuenta</th>
+                <th>Saldo</th>
+                <th>Total</th>
+                <!-- Agrega más encabezados según las propiedades de tu modelo -->
+            </tr>
+        </thead>
+        <tbody id="resultadoBusqueda">
+            @foreach (var objeto in Model)
+            {
+                <tr>
+                    <td>@objeto.pagoPedidoId</td>
+                    <td>@objeto.acuenta</td>
+                    <td>@objeto.saldo</td>
+                    <td>@objeto.total</td>
+                    
+                    <!-- Agrega más columnas según las propiedades de tu modelo -->
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Busca y filtra los resultados al escribir en el input
+    $('#inputBusqueda').on('input', function () {
+        const filtro = $(this).val().toLowerCase();
+        $('#resultadoBusqueda tr').filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(filtro) > -1)
+        });
+    });
+</script>

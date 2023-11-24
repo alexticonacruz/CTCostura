@@ -8,8 +8,7 @@
         public decimal saldo { get; set; }
         public decimal total { get; set; }
         public DateTime fecha { get; set; }
-        public Pedido Pedido { get; set; } = default!;
-        public Cliente Cliente { get; set; } = default!;
+        public Pedido? Pedido { get; set; } = default!;
 
     }
 }

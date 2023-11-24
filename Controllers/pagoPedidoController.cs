@@ -16,7 +16,8 @@ namespace SistemaCos_001.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var pagos = _pagoPedido.GetPedidos;
+            return View(pagos);
         }
         public IActionResult crear()
         {
@@ -33,10 +34,25 @@ namespace SistemaCos_001.Controllers
             Pedido cat = pedidoRepository.GetById(id);
             if (cat != null)
             {
-                return View(cat);
+                var model = new pagoPedidoViewModel
+                {
+                    newPedido = cat,
+                    pagoPedido = new pagoPedido()
+                };
+                return View(model);
             }
 
             return NotFound();
+        }
+        [HttpPost]
+        public IActionResult crear(pagoPedidoViewModel newPago)
+        {
+            var ob = pedidoRepository.GetById(newPago.pagoPedido.pedidoId);
+            ob.montoTotal = newPago.pagoPedido.saldo;
+            pedidoRepository.update(ob);
+            _pagoPedido.agregar(newPago.pagoPedido);
+            return Redirect("Index");
+            
         }
     }
 }

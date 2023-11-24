@@ -29,6 +29,11 @@ namespace SistemaCos_001.Models
                 .ThenInclude(dp => dp.Producto)
                 .SingleOrDefault(p => p.pedidoId == id);
         }
+        public void update(Pedido newPedido)
+        {
+            _context.Update(newPedido);
+            _context.SaveChanges();
+        }
 
     }
 }

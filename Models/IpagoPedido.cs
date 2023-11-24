@@ -3,5 +3,6 @@
     public interface IpagoPedido
     {
         void agregar(pagoPedido newPago);
+        IEnumerable<pagoPedido> GetPedidos { get; }
     }
 }
