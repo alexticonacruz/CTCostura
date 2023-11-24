@@ -9,7 +9,42 @@
     <p>Precio : @stock.precioMenor</p>
     <p>Categoria : @stock.Producto.Categoria.nombre</p>
 }*@
-<br />
+
+
+<div id="contenedorRopa">
+    @foreach (var stock in Model.stocks)
+    {
+        <div class="cRopa">
+            <div class="imageRopa">
+                <picture class="cPicture">
+                    <img src="~/imagenes/@stock.Producto.urlImagen" alt="">
+                </picture>
+            </div>
+            <div class="textoRopa">
+                <h2 class="nameRopa">@stock.Producto.modelo</h2>
+                <div class="btnDetalleRopa">
+                    <p class="precioRopa">Precio : 45bs</p>
+                    <p class="btnIconRopa">
+                        <a asp-controller="ShoppingCart"
+                       asp-action="AddToShoppingCart"
+                       asp-route-productoId="@stock.stockId">
+                            <span class="material-symbols-rounded CBtn">
+                                shopping_cart
+                            </span>
+                        </a>
+                        <a href="#">
+                            <span class="material-symbols-rounded DBtn">
+                                north_east
+                            </span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+     }
+    
+
+</div>
 @foreach (var stock in Model.stocks)
 {
     <div class="tarjeta">

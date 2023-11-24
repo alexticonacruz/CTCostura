@@ -5,8 +5,16 @@
       "PackagePath": "staticwebassets\\SistemaCos_001.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\css\\cardPedido.css",
+      "PackagePath": "staticwebassets\\css\\cardPedido.css"
+    },
+    {
       "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\css\\pedido.css",
       "PackagePath": "staticwebassets\\css\\pedido.css"
+    },
+    {
+      "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\css\\ropa.css",
+      "PackagePath": "staticwebassets\\css\\ropa.css"
     },
     {
       "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\css\\site.css",
@@ -23,6 +31,14 @@
     {
       "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\im\\chris.jpg",
       "PackagePath": "staticwebassets\\im\\chris.jpg"
+    },
+    {
+      "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\im\\jackob copia.png",
+      "PackagePath": "staticwebassets\\im\\jackob copia.png"
+    },
+    {
+      "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\im\\jackob.jpg",
+      "PackagePath": "staticwebassets\\im\\jackob.jpg"
     },
     {
       "Id": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\imagenes\\cnvfa22wtee2-035.jpg",

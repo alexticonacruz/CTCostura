@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Pedido
+
+
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            Detalles del Pedido
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Id del Pedido:</strong> @Model.pedidoId</p>
+                    <p><strong>Fecha:</strong> @Model.fecha</p>
+                    <p><strong>Monto:</strong> @Model.monto</p>
+                    <p><strong>Monto Total:</strong> @Model.montoTotal</p>
+                    <p><strong>Descuento:</strong> @Model.descuento</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Fecha de Entrega:</strong> @Model.fechaEntrega</p>
+                    <p><strong>Estado:</strong> @Model.estado</p>
+                    <p><strong>Cliente:</strong> @Model.Cliente?.name</p>
+                    <p><strong>Dirección:</strong> @Model.Cliente?.direccion</p>
+                    <p><strong>Número:</strong> @Model.Cliente?.number</p>
+                </div>
+            </div>
+            <hr>
+            <h5>Detalles del Pedido</h5>
+            @if (Model.DetallePedidos != null)
+            {
+                <ul>
+                    @foreach (var detalle in Model.DetallePedidos)
+                    {
+                        <li> Modelo : @detalle.Producto.modelo Talla: @detalle.Producto.talla - Cantidad: @detalle.cantidad  -photo : <a href="~/imagenes/@detalle.Producto.urlImagen" target="_blank">Ver Imagen</a></li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+
+
+<form>
+    <div class="form-group">
+        <label for="acuenta">Cantidad Dejada</label>
+        <input type="number" class="form-control" id="acuenta" />
+    </div>
+    <div class="form-group">
+        <label for="saldo">Saldo</label>
+        <input type="number" class="form-control" id="saldo" readonly />
+    </div>
+    <div class="form-group">
+        <label for="total">Total del Pedido</label>
+        <input type="number" class="form-control" id="total" value="@Model.montoTotal" readonly />
+    </div>
+</form>

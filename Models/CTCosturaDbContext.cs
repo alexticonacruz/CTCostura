@@ -18,6 +18,8 @@ namespace SistemaCos_001.Models
         public DbSet<ShoppingCartItem> ShoppingCartItemsDbSet { get; set; }
         public DbSet<Pedido> pedidosDbSet { get; set; }
         public DbSet<DetallePedido> detallePedidosDbSet { get; set; }
+        public DbSet<Cliente> ClientesDbSet { get; set; }
+        public DbSet<pagoPedido> PagoPedidosDbSet { get; set; }
 
     }
 }

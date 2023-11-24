@@ -228,6 +228,32 @@ namespace SistemaCos_001.Migrations
                     b.ToTable("CategoriasDbSet");
                 });
 
+            modelBuilder.Entity("SistemaCos_001.Models.Cliente", b =>
+                {
+                    b.Property<int>("clienteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("direccion")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("nameCompany")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("number")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("clienteId");
+
+                    b.ToTable("ClientesDbSet");
+                });
+
             modelBuilder.Entity("SistemaCos_001.Models.DetallePedido", b =>
                 {
                     b.Property<int>("detallePedidoId")
@@ -288,6 +314,9 @@ namespace SistemaCos_001.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("clienteId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<decimal?>("descuento")
                         .HasColumnType("TEXT");
 
@@ -310,6 +339,8 @@ namespace SistemaCos_001.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("pedidoId");
+
+                    b.HasIndex("clienteId");
 
                     b.ToTable("pedidosDbSet");
                 });
@@ -425,6 +456,34 @@ namespace SistemaCos_001.Migrations
                     b.HasKey("ventaId");
 
                     b.ToTable("VentasDbSet");
+                });
+
+            modelBuilder.Entity("SistemaCos_001.Models.pagoPedido", b =>
+                {
+                    b.Property<int>("pagoPedidoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("acuenta")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("fecha")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("pedidoId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("saldo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("total")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("pagoPedidoId");
+
+                    b.HasIndex("pedidoId");
+
+                    b.ToTable("PagoPedidosDbSet");
                 });
 
             modelBuilder.Entity("SistemaCos_001.Models.stock", b =>
@@ -548,6 +607,17 @@ namespace SistemaCos_001.Migrations
                     b.Navigation("Venta");
                 });
 
+            modelBuilder.Entity("SistemaCos_001.Models.Pedido", b =>
+                {
+                    b.HasOne("SistemaCos_001.Models.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("clienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+                });
+
             modelBuilder.Entity("SistemaCos_001.Models.Producto", b =>
                 {
                     b.HasOne("SistemaCos_001.Models.Categoria", "Categoria")
@@ -568,6 +638,17 @@ namespace SistemaCos_001.Migrations
                         .IsRequired();
 
                     b.Navigation("Producto");
+                });
+
+            modelBuilder.Entity("SistemaCos_001.Models.pagoPedido", b =>
+                {
+                    b.HasOne("SistemaCos_001.Models.Pedido", "Pedido")
+                        .WithMany()
+                        .HasForeignKey("pedidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pedido");
                 });
 
             modelBuilder.Entity("SistemaCos_001.Models.stock", b =>

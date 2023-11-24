@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "SxHCP8KmShCphU330NIHJecWSNWCi2HIUSeJ8UD9d4Q=",
+  "Hash": "ZCMR8RbqamA7wFGBtEOAS0JQznjf7gIGh8V3/hmslH8=",
   "Source": "SistemaCos_001",
   "BasePath": "_content/SistemaCos_001",
   "Mode": "Default",
@@ -1071,6 +1071,23 @@
       "OriginalItemSpec": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\SistemaCos_001.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\css\\cardPedido.css",
+      "SourceId": "SistemaCos_001",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\",
+      "BasePath": "_content/SistemaCos_001",
+      "RelativePath": "css/cardPedido.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\cardPedido.css"
+    },
+    {
       "Identity": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\css\\pedido.css",
       "SourceId": "SistemaCos_001",
       "SourceType": "Discovered",
@@ -1086,6 +1103,23 @@
       "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\pedido.css"
+    },
+    {
+      "Identity": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\css\\ropa.css",
+      "SourceId": "SistemaCos_001",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\",
+      "BasePath": "_content/SistemaCos_001",
+      "RelativePath": "css/ropa.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Always",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\ropa.css"
     },
     {
       "Identity": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\css\\site.css",
@@ -1154,6 +1188,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\im\\chris.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\im\\jackob copia.png",
+      "SourceId": "SistemaCos_001",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\",
+      "BasePath": "_content/SistemaCos_001",
+      "RelativePath": "im/jackob copia.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\im\\jackob copia.png"
+    },
+    {
+      "Identity": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\im\\jackob.jpg",
+      "SourceId": "SistemaCos_001",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\",
+      "BasePath": "_content/SistemaCos_001",
+      "RelativePath": "im/jackob.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\im\\jackob.jpg"
     },
     {
       "Identity": "C:\\Users\\alex\\Desktop\\visual\\SistemaCos_001\\wwwroot\\imagenes\\cnvfa22wtee2-035.jpg",

@@ -1,0 +1,145 @@
+﻿body {
+}
+.label {
+    display: grid;
+    width: 200px;
+    padding: 1.5rem 0;
+    grid-template-areas: "input";
+    > *
+
+{
+    grid-area: input;
+}
+
+}
+
+.span {
+    transform-origin: left;
+    transition: transform .3s, color .3s;
+}
+
+.input {
+    height: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid slateblue;
+    font: inherit;
+    background-color: transparent;
+    &:focus + .span, &:not(:placeholder-shown) + .span
+
+{
+    color: #695acde9;
+    transform: translate(0,-100%)scale(.8);
+}
+}
+
+.c2 {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.cc2 {
+    width: 250px;
+    height: 280px;
+    background: linear-gradient(-45deg, rgba(255, 0, 0, 0.439), rgba(0, 0, 255, 0.531));
+    transition: all 1s ease-in-out;
+}
+
+    .cc2 img {
+        width: 200px;
+        height: 200px;
+        cursor: pointer;
+        transition: height 0.7s ease;
+    }
+
+.textoPedidoCardCc2 {
+    display: none;
+}
+
+    .textoPedidoCardCc2 label {
+        margin-top: -10px;
+    }
+
+.cc2.activo {
+    display: flex;
+    width: 470px;
+    transition: width 1s ease-in-out;
+    & img
+
+{
+    width: 250px;
+    height: 280px;
+    transition: height 1s ease-in-out;
+}
+
+}
+
+.imgcc2.activo {
+    &~.textoPedidoCc2
+
+{
+    display: none;
+}
+
+& ~ .textoPedidoCardCc2 {
+    display: block;
+    background-color: rgba(243, 161, 161, 0.341);
+    padding: 10px;
+    animation: text 2s 1;
+}
+
+}
+
+.textoPedidoCc2 {
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    & h2, p
+
+{
+    margin-left: 15px;
+}
+
+}
+
+@keyframes text {
+    0% {
+        transform: translateX(-150px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+
+
+/* Estilos para la tabla */
+#tablaProductos {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+    #tablaProductos th,
+    #tablaProductos td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #tablaProductos th {
+        background-color: #f2f2f2;
+    }
+
+ Botón de agregar a la tabla 
+.btnAgregar {
+    background-color: #4caf50;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

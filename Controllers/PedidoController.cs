@@ -10,10 +10,12 @@ namespace SistemaCos_001.Controllers
     {
         private readonly IProductoRepository _productoRepository;
         private readonly IPedidoRepository _pedidoRepository;
-        public PedidoController(IProductoRepository productoRepository, IPedidoRepository pedidoRepository )
+        private readonly IClienteRepository _clienteRepository;
+        public PedidoController(IProductoRepository productoRepository, IPedidoRepository pedidoRepository, IClienteRepository clienteRepository )
         {
             _pedidoRepository = pedidoRepository;
             _productoRepository = productoRepository;
+            _clienteRepository = clienteRepository;
         }
         public IActionResult Index()
         {
@@ -25,7 +27,8 @@ namespace SistemaCos_001.Controllers
                 // Trabajar con cada objeto (producto)
             }
             var newPedido = new Pedido();
-            var model = new PedidoViewModel(_productoRepository.AllProductos,newPedido);
+            var datos = _clienteRepository.GetAll;
+            var model = new PedidoViewModel(_productoRepository.AllProductos,newPedido, new Cliente(), datos);
             return View(model);
         }
         [HttpPost]
@@ -41,6 +44,7 @@ namespace SistemaCos_001.Controllers
 
                 // Eliminar la última comilla doble
                 dato = dato.Substring(0, dato.Length - 1);
+                var totalSaldo = 0;
                 var lista = new List<DetallePedido>();
                 Console.WriteLine(dato);
                 var listaObjetos = JsonConvert.DeserializeObject<List<DetallePedido>>(dato);
@@ -51,19 +55,15 @@ namespace SistemaCos_001.Controllers
                         productoId = producto.productoId,
                         cantidad = producto.cantidad,
                         total = producto.total,
-                        
-                        //id = producto.id,
-                        //nombre = producto.nombre,
-                        //precio = producto.precio,
-                        //cantidad = producto.cantidad
                     };
-
+                    totalSaldo += objeto.total;
                     lista.Add(objeto);
                 }
                 model.newPedido.DetallePedidos = lista;
+                model.newPedido.montoTotal = totalSaldo;
+                model.newPedido.monto = totalSaldo;
                 _pedidoRepository.agregar(model.newPedido);
-                // El código siguiente debería ejecutarse solo si la deserialización tiene éxito
-                // ... (código adicional)
+                return RedirectToAction("crear","pagoPedido");
             }
             catch (Exception ex)
             {

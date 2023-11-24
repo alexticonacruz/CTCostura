@@ -1,6 +1,16 @@
-html {
+/*html {
   font-size: 14px;
+}*/
+/* Fondo transparente para el header en el Home/Index */
+/*body.is-home header {
+    background-color: red;
+}*/
+
+/* Fondo blanco para el header en otras páginas */
+/*body:not(.is-home) header {
+    background-color: white;
 }
+
 
 @media (min-width: 768px) {
   html {
@@ -19,4 +29,4 @@ html {
 
 body {
   margin-bottom: 60px;
-}
+}*/

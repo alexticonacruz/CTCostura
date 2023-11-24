@@ -1,0 +1,114 @@
+#contenedorRopa{
+    width: 100%;
+    padding: 25px !important;
+    background-color: aliceblue !important;
+    /* display: flex;
+    gap: 20px;
+    flex-wrap: wrap; */
+    display: grid;
+    /* grid-template-columns: 
+    repeat(auto-fit, minmax(min(300px, 100%),1fr)); */
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(
+            280px,
+            1fr
+        )
+        
+    );
+    gap: 16px;
+}
+.cRopa{
+    width: 280px;
+    height: 300px;
+    border-radius: 24px 24px 0 0;
+    /* border: 1px solid purple; */
+    background-color: #F8F8F8;
+    overflow: hidden;
+    &:hover{
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.385);
+    }
+}
+.imageRopa{
+    background: linear-gradient(-45deg,rgba(255, 0, 0, 0.403),rgba(0, 0, 255, 0.477));
+} 
+.cPicture{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cRopa img{
+    width: 250px;
+    height: 220px;
+    filter: drop-shadow(10px -5px 10px rgba(0, 0, 0, 0.46));
+}
+.textoRopa{
+    padding: 0px 20px 15px 20px!important;
+}
+.nameRopa{
+    color: blueviolet;
+    opacity: 0.7;
+}
+.btnDetalleRopa{
+    display: flex;
+    justify-content: space-between;
+}
+.precioRopa{
+    color: rgb(172, 172, 172) ;
+}
+.btnIconRopa{
+    display: flex;
+    gap: 10px;
+}
+.CBtn{
+    position: relative;
+    color: rgb(4, 148, 148);
+}
+/* .CBtn::after{
+    position: absolute;
+    top: -35px;
+    left: -25px;
+    content: "Agregar";
+    width: 80px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif !important;
+    background-color: rgba(4, 148, 148, 0.702);
+    color: black;
+} */
+.DBtn{
+    color: blueviolet ;
+}
+.btnIconRopa span:hover{
+    opacity: 0.5;
+}
+
+/*dashboard*/
+.das{
+    display: flex;
+    gap: 10px;
+}
+.ct1{
+
+}
+.dashboard {
+    padding: 30px !important;
+    display: flex !important;
+    flex-direction: column;
+    gap: 15px;
+    background-color: aliceblue;
+}
+    .dashboard > a {
+        display: inline-block;
+        width: 150px;
+        background-color: white;
+        padding: 10px 20px !important;
+        border-radius: 14px;
+        &:hover{
+        background-color: blueviolet;
+        color: aliceblue !important;
+        cursor: pointer;
+    }
+}

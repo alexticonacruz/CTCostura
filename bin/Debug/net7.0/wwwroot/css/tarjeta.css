@@ -1,4 +1,4 @@
-*{
+/**{
     margin: 0;
     padding: 0;
 }
@@ -139,15 +139,15 @@ picture{
 }
 .texto > p{
     font-family: 'Montserrat', sans-serif !important;
-}
+}*/
 
 
 
 /* Establece un alto fijo para mostrar solo dos líneas */
-.truncate-text {
+/*.truncate-text {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 2;*/
     /* Número de líneas a mostrar */
-    -webkit-box-orient: vertical;
+    /*-webkit-box-orient: vertical;
     overflow: hidden;
-}
+}*/

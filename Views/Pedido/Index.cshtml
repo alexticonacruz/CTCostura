@@ -1,75 +1,138 @@
 ﻿
 @using SistemaCos_001.ViewModels;
 @model PedidoViewModel;
+@*este es nuevo*@
+
+<script>
+    function activarCardC(elemento) {
+        // Toggle de una clase llamada "activo"
+        elemento.classList.toggle("activo");
+        activarCardC2(elemento.parentNode);
+    }
+    function activarCardC2(elemento) {
+        // Toggle de una clase llamada "activo"
+        elemento.classList.toggle("activo");
+    }
+
+    function activarCard(elemento) {
+        // Toggle de una clase llamada "activo"
+        elemento.classList.toggle("activo");
+    }
+
+</script>
 <form asp-action="Agregar" id="formularioStock" enctype="multipart/form-data" method="post" role="form">
-    <input type="datetime-local" id="fechaInput" onchange="obtenerFecha()">
-    <script>
-        function obtenerFecha() {
-            const input = document.getElementById('fechaInput');
-            const fechaSeleccionada = new Date(input.value);
 
-            const año = fechaSeleccionada.getFullYear();
-            const mes = ('0' + (fechaSeleccionada.getMonth() + 1)).slice(-2);
-            const dia = ('0' + fechaSeleccionada.getDate()).slice(-2);
-            const hora = ('0' + fechaSeleccionada.getHours()).slice(-2);
+    <div class="col-md-6 mb-3">
+        <label asp-for="newPedido.fechaEntrega" class="form-label">Fecha de Entrega</label>
+        <div class="input-group date">
+            <input id="fechaEntrega" asp-for="newPedido.fechaEntrega" class="form-control" required
+                   type="date" min="2000-01-01" />
+            <span class="input-group-addon">
+                <span class="fa fa-calendar"></span>
+            </span>
+        </div>
+        <span asp-validation-for="newPedido.fechaEntrega" class="text-danger"></span>
+    </div>
 
-            const fechaFormateada = `${año}-${mes}-${dia} ${hora}:00:00`;
-            console.log('Fecha seleccionada:', fechaFormateada);
-            // Realiza cualquier acción con la fecha formateada aquí
-        }
-    </script>
-    <input asp-for="newPedido.jsonCadena" class="form-control" id="listaObjetos" />
+    <div class="form-group col-md-6 mb-3">
+        <label asp-for="newPedido.clienteId">Seleccionar Cliente</label>
+        <div class="input-group">
+            <select asp-for="newPedido.clienteId" class="form-control" id="categoriaPolera">
+                <option value="">Ningún Cliente Seleccionado</option>
+                @foreach (var obj in Model.clientes)
+                {
+                    <option value="@obj.clienteId">@obj.name</option>
+                }
+            </select>
+            
+            <button type="button" class="btn btn-primary" id="btnAbrirModalCategoria21" data-toggle="modal" data-target="#modalCategoria">
+                Crear Categoría
+            </button>
+        </div>
+        <span asp-validation-for="newPedido.clienteId" class="text-danger"></span>
+    </div>
+    <input asp-for="newPedido.jsonCadena" class="form-control" id="listaObjetos" style="display:none;" />
     @*<input type="hidden" id="listaObjetos" name="@Model.newPedido.jsonCadena" />*@
-    <button type="button" onclick="enviarFormulario()">Enviar Datos</button>
+    <div class="form-group">
+        <button style="margin-bottom:10px;" type="button" class="btn btn-primary" onclick="enviarFormulario()">Enviar Datos</button>
+    </div>
+    
 
 </form>
-<div class="tarjetaContenedor">
-    @foreach (var producto in Model.productos)
-    {
-        <div class="fotoP">
-            <div id="fotos" onclick="activarDetalle(this)">
-                <picture>
-                    <img id="fotoA" src="~/imagenes/@producto.urlImagen" alt="">
-                </picture>
+    @*modal*@
 
-            </div>
-            <div class="camisa">
-                <div class="cuello"></div>
-                <div class="cuerpo">
+    <div class="modal fade" id="modalCategoria21" tabindex="-1" role="dialog" aria-labelledby="modalCategoriaLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCategoriaLabel">Crear Categoría</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formCategoria">
 
-                    <div class="manga"></div>
-                    <div class="manga"></div>
+                        <div class="form-group">
+                            <label asp-for="newCliente.name" for="name">Nombre</label>
+                            <input asp-for="newCliente.name" type="text" class="form-control" id="name" name="name">
 
-                    <div class="textoS">
-                        <h2>Damaris @producto.productoId</h2>
-                        <p id="productoId" style="display: none;">1</p>
-                        <div class="precioS">
-                            <p id="id" style="display: none;">@producto.productoId</p>
-                            <p>Precio :</p>
-                            <input type="number" id="precioS" placeholder="50">
+                            <label asp-for="newCliente.nameCompany" for="nameCompany">Nombre Compañia</label>
+                            <input asp-for="newCliente.nameCompany" type="text" class="form-control" id="nameCompany" name="nameCompany">
 
+                            <label asp-for="newCliente.direccion" for="direccion">Direccion</label>
+                            <input asp-for="newCliente.direccion" type="text" class="form-control" id="direccion" name="direccion">
+
+                            <label asp-for="newCliente.number" for="number">Numero</label>
+                            <input asp-for="newCliente.number" type="text" class="form-control" id="number" name="number">
                         </div>
-                        <div class="cantidadS">
-                            <p>Cantidad :</p>
-                            <input type="number" id="cantidadS" placeholder="5">
-
-                        </div>
-
-                        <button class="btn btn-primary" id="btnDetalle"
-                                onclick="agregarDesdeTarjeta(this.parentElement)">
-                            Agregar
-                        </button>
-                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarCategoria">Guardar Categoría</button>
                 </div>
             </div>
         </div>
-    }
+    </div>
+  
 
     
+   
 
 
-</div>
-@*<button class="btn btn-primary" onclick="enviarTabla()">Enviar al Controlador</button>*@
+<div class="c2">
+    @foreach (var producto in Model.productos)
+    {
+        <div class="cc2">
+            <div class="imgcc2" onclick="activarCardC(this)">
+                <picture>
+                    <img src="~/imagenes/@producto.urlImagen" alt="">
+                </picture>
+            </div>
+            <div class="textoPedidoCc2">
+                <h2>@producto.modelo</h2>
+                <p>Talla : @producto.talla</p>
+            </div>
+            <div class="textoPedidoCardCc2">
+                <p id="id" style="display: none;">@producto.productoId</p>
+                <h2>@producto.modelo</h2>
+                <p>Talla : @producto.talla</p>
+                <label class="label">
+                    <input type="text" class="input" id="precioS" placeholder=" ">
+                    <span class="span">Precio:</span>
+                </label>
+                <label class="label">
+                    <input type="text" class="input" id="cantidadS" placeholder=" ">
+                    <span class="span">Cantidad:</span>
+                </label>
+
+                <button class="btn btn-outline-success" id="btnPedido" onclick="agregarDesdeTarjeta(this.parentElement)">Guardar</button>
+            </div>
+            
+        </div>
+    }
+</div>  
 
 <h2>Tabla de Productos</h2>
 
@@ -91,8 +154,62 @@
 
 
 <footer>Propiedad ENKI</footer>
-
 <script>
+
+    <script>
+        $(document).ready(function () {
+            
+            // Método jQuery para abrir el modal de categoría
+            $("#btnAbrirModalCategoria21").click(function () {
+                $('#modalCategoria21').modal('show');
+            });
+
+            // Método jQuery para crear categorías dentro del modal
+            $("#btnGuardarCategoria").click(function () {
+                var datos = $("#formCategoria").serialize();
+                console.log(datos);
+                $.ajax({
+                    url: "/Cliente/agregar",
+                    type: "POST",
+                    data: datos,
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success) {
+                            console.log(response.data);
+                            $('#modalCategoria21').modal('hide');
+                            $("#categoriaPolera").append($("<option></option>").val(response.data.categoriaId).html(response.data.name));
+
+                        } else {
+                            alert("Ocurrió un error al crear la categoría: " + response.errors);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Ocurrió un error al crear la categoría: " + error);
+                    }
+                });
+            });
+        });
+</script>
+
+</script>
+<script>
+    /*  -------   fecha actual  ---------- */
+    // Obtener el elemento de fecha por su ID
+    var fechaInput = document.getElementById('fechaEntrega');
+
+    // Obtener la fecha actual en formato YYYY-MM-DD
+    var fechaActual = new Date().toISOString().slice(0, 10);
+
+    // Establecer el valor predeterminado del campo de fecha
+    fechaInput.value = fechaActual;
+
+
+
+
+
+    /* aqui termina */
+
+
     function agregarDesdeTarjeta(tarjeta) {
         var da = tarjeta.querySelector("#cantidadS"); //obtiene la etiqueta
         var cantidad = da.value;
@@ -190,17 +307,3 @@
     
 
 </script>
-@*<script>
-    const inputFecha = document.getElementById('fecha');
-
-    inputFecha.addEventListener('change', function (event) {
-        const fechaSeleccionada = new Date(event.target.value);
-        const fechaFormateada = `${fechaSeleccionada.getFullYear()}${padZero(fechaSeleccionada.getMonth() + 1)}${padZero(fechaSeleccionada.getDate())}`;
-        console.log('Fecha seleccionada formateada:', fechaFormateada);
-        // Realiza cualquier acción con la fecha formateada aquí
-    });
-
-    function padZero(num) {
-        return num < 10 ? `0${num}` : num;
-    }
-</script>*@

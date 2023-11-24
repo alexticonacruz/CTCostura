@@ -64,6 +64,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmlhXGxpc3RDYXRlZ29yaWEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/alex/Desktop/visual/SistemaCos_001/Views/Cliente/crear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxjcmVhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex/Desktop/visual/SistemaCos_001/Views/Cliente/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/alex/Desktop/visual/SistemaCos_001/Views/Estadistica/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0YWRpc3RpY2FcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -74,6 +82,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/alex/Desktop/visual/SistemaCos_001/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex/Desktop/visual/SistemaCos_001/Views/pagoPedido/crear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NccGFnb1BlZGlkb1xjcmVhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex/Desktop/visual/SistemaCos_001/Views/pagoPedido/editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NccGFnb1BlZGlkb1xlZGl0YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex/Desktop/visual/SistemaCos_001/Views/pagoPedido/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NccGFnb1BlZGlkb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/alex/Desktop/visual/SistemaCos_001/Views/Paypal/Index.cshtml]
