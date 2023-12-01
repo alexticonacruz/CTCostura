@@ -32,12 +32,15 @@ namespace SistemaCos_001.Controllers
         public IActionResult editar(int id)
         {
             Pedido cat = pedidoRepository.GetById(id);
+            var ultimoPago = _pagoPedido.ultimoPago(id);
+
             if (cat != null)
             {
                 var model = new pagoPedidoViewModel
                 {
                     newPedido = cat,
-                    pagoPedido = new pagoPedido()
+                    pagoPedido = new pagoPedido(),
+                    saldoTemporal = ultimoPago
                 };
                 return View(model);
             }
@@ -47,12 +50,17 @@ namespace SistemaCos_001.Controllers
         [HttpPost]
         public IActionResult crear(pagoPedidoViewModel newPago)
         {
-            var ob = pedidoRepository.GetById(newPago.pagoPedido.pedidoId);
-            ob.montoTotal = newPago.pagoPedido.saldo;
-            pedidoRepository.update(ob);
+            //var ob = pedidoRepository.GetById(newPago.pagoPedido.pedidoId);
+            //newPago.pagoPedido.total = ob.montoTotal;
+            //newPago.pagoPedido.saldo = ob.montoTotal - newPago.pagoPedido.acuenta;
+            ////pedidoRepository.update(ob);
             _pagoPedido.agregar(newPago.pagoPedido);
-            return Redirect("Index");
+            return Redirect("primerPago");
             
+        }
+        public IActionResult primerPago()
+        {
+            return View();
         }
     }
 }

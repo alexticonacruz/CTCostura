@@ -7,5 +7,6 @@ namespace SistemaCos_001.ViewModels
         public IEnumerable<Pedido> Pedidos { get; set; }
         public pagoPedido pagoPedido { get; set; }
         public Pedido newPedido { get; set; }
+        public decimal saldoTemporal { get; set; }
     }
 }

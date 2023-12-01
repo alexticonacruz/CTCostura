@@ -53,19 +53,21 @@
         <input asp-for="pagoPedido.pedidoId" type="number" class="form-control"  value="@Model.newPedido.pedidoId" readonly />
     </div>
 
-    <div class="form-group">
+    <div class="form-group" >
         <label asp-for="pagoPedido.acuenta" for="acuenta">Cantidad Dejada</label>
         <input asp-for="pagoPedido.acuenta" type="number" class="form-control" id="acuenta" />
     </div>
     <div class="form-group">
         <label asp-for="pagoPedido.saldo" for="saldo">Saldo</label>
-        <input asp-for="pagoPedido.saldo" type="number" class="form-control" id="saldo" readonly />
+        <input asp-for="pagoPedido.saldo" type="number" class="form-control" id="saldo" value="@Convert.ToInt32(Model.saldoTemporal)" readonly />
+        <input type="number" id="saldoTemporal" style="display:none;" value="@Convert.ToInt32(Model.saldoTemporal)" />
     </div>
+
     <div class="form-group">
         <label asp-for="pagoPedido.total" for="total">Total del Pedido</label>
-        <input asp-for="pagoPedido.total" type="number" class="form-control" id="total" value="@Convert.ToInt32(Model.newPedido.montoTotal)" readonly />
+        <input asp-for="pagoPedido.total" type="number" class="form-control" id="total" value="@Convert.ToInt32(Model.newPedido.montoTotal)" readonly  />
     </div>
-    <button class="btn btn-success">Guardar</button>
+    <button  type="submit" class="btn btn-success">Guardar</button>
 </form>
 
 
@@ -74,10 +76,18 @@
     function calcularSaldo() {
         const cantidadDejada = parseFloat(document.getElementById('acuenta').value);
         const totalPedido = parseFloat(document.getElementById('total').value);
-        const saldo = totalPedido - cantidadDejada;
-
-        // Mostrar el saldo calculado en el campo correspondiente
-        document.getElementById('saldo').value = saldo.toFixed(2);
+        const totalSaldoP = parseFloat(document.getElementById('saldoTemporal').value);
+        const saldo = totalSaldoP - cantidadDejada;
+        console.log("Entro al func");
+        console.log(cantidadDejada);
+        if (cantidadDejada === 0 || isNaN(parseFloat(cantidadDejada))) {
+            document.getElementById('saldo').value = totalSaldoP;
+        }
+        else{
+            // Mostrar el saldo calculado en el campo correspondiente
+            document.getElementById('saldo').value = saldo.toFixed(2);
+        }
+        
     }
 
     // Escuchar el evento 'input' en el campo 'acuenta' para calcular el saldo

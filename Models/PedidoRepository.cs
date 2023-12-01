@@ -14,9 +14,8 @@ namespace SistemaCos_001.Models
         {
             newPedido.fecha = DateTime.Now;
             newPedido.estado = "proceso";
-            newPedido.descuento = 0;
             newPedido.jsonCadena = "";
-            _context.Add(newPedido);
+            _context.pedidosDbSet.Add(newPedido);
             _context.SaveChanges();
         }
         public IEnumerable<Pedido> GetAll => _context.pedidosDbSet.Include(cliente => cliente.Cliente).ToList();

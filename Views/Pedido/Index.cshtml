@@ -20,48 +20,72 @@
     }
 
 </script>
-<form asp-action="Agregar" id="formularioStock" enctype="multipart/form-data" method="post" role="form">
-
-    <div class="col-md-6 mb-3">
-        <label asp-for="newPedido.fechaEntrega" class="form-label">Fecha de Entrega</label>
-        <div class="input-group date">
-            <input id="fechaEntrega" asp-for="newPedido.fechaEntrega" class="form-control" required
-                   type="date" min="2000-01-01" />
-            <span class="input-group-addon">
-                <span class="fa fa-calendar"></span>
-            </span>
+<form asp-action="Agregar" asp-controller="Pedido" id="formularioStock" enctype="multipart/form-data" method="post" role="form">
+    
+    <div class="per">
+        <div class="perfilP">
+            <picture> <img src="~/im/chris.jpg" /></picture>
+            <h5 id="nameProfile">Brigida belen ramos</h5>
+            <p id="nameProfileConpany">Enki Srl.</p>
         </div>
-        <span asp-validation-for="newPedido.fechaEntrega" class="text-danger"></span>
-    </div>
+        <div class="datosP col-12 col-sm-11 col-md-10 col-lg-8">
+            <h4 style="color: #703d6f;">Datos Del Pedido</h4>
+            <div class="form-group  mb-3 col-12 col-sm-12 col-md-8 col-lg-12">
+                <label asp-for="newPedido.fechaEntrega" class="form-label" style="color: #706482;">Fecha de Entrega</label>
+                <div class="input-group date">
+                    <input id="fechaEntrega" asp-for="newPedido.fechaEntrega" class="form-control" required
+                           type="date" min="2000-01-01" />
+                    <span class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+                </div>
+                <span asp-validation-for="newPedido.fechaEntrega" class="text-danger"></span>
+            </div>
 
-    <div class="form-group col-md-6 mb-3">
-        <label asp-for="newPedido.clienteId">Seleccionar Cliente</label>
-        <div class="input-group">
-            <select asp-for="newPedido.clienteId" class="form-control" id="categoriaPolera">
-                <option value="">Ningún Cliente Seleccionado</option>
-                @foreach (var obj in Model.clientes)
-                {
-                    <option value="@obj.clienteId">@obj.name</option>
-                }
-            </select>
+            <div class="form-group  mb-3 col-12 col-sm-12 col-md-8 col-lg-12">
+                <label asp-for="newPedido.clienteId" class="form-label" style="color: #706482;">Seleccionar Cliente</label>
+                <div class="input-group">
+                    <select asp-for="newPedido.clienteId" class="form-control" id="categoriaPolera" onchange="obtenerDatosCliente()">
+                        <option value="">Ningún Cliente Seleccionado</option>
+                        @foreach (var obj in Model.clientes)
+                        {
+                            <option value="@obj.clienteId">@obj.name</option>
+                        }
+                    </select>
+                    
+                    <button type ="button" class="btn btn-primary" id="btnAbrirModalCategoria" data-toggle="modal" data-target="#modalCategoria">
+                        Crear Cliente
+                    </button>
+                </div>
+                <span asp-validation-for="newPedido.clienteId" class="text-danger"></span>
+            </div>
+
+            <div class="col-sm-6" style="display:none">
+                <input asp-for="newPedido.monto" type="text" class="form-control" id="montoF" readonly >
+            </div>
+            <div class="col-sm-6" style="display:none">
+                <input asp-for="newPedido.descuento" type="text" class="form-control" id="descuentoPedido" readonly>
+            </div>
+            <div class="col-sm-6" style="display:none">
+                <input asp-for="newPedido.montoTotal" type="text" class="form-control" id="montoTotalF" readonly >
+            </div>
             
-            <button type="button" class="btn btn-primary" id="btnAbrirModalCategoria21" data-toggle="modal" data-target="#modalCategoria">
-                Crear Categoría
-            </button>
+            <div class="col-sm-6" style="display:none">
+                <input asp-for="newPago.acuenta" type="number" class="form-control" id="acuentaF" readonly>
+            </div>
+            
+            <input asp-for="newPedido.jsonCadena" class="form-control" id="listaObjetos" style="display:none;" />
+            <!-- <input type="hidden" id="listaObjetos" name="@Model.newPedido.jsonCadena" /> -->
+            
         </div>
-        <span asp-validation-for="newPedido.clienteId" class="text-danger"></span>
     </div>
-    <input asp-for="newPedido.jsonCadena" class="form-control" id="listaObjetos" style="display:none;" />
-    @*<input type="hidden" id="listaObjetos" name="@Model.newPedido.jsonCadena" />*@
-    <div class="form-group">
-        <button style="margin-bottom:10px;" type="button" class="btn btn-primary" onclick="enviarFormulario()">Enviar Datos</button>
-    </div>
+    
     
 
 </form>
     @*modal*@
 
-    <div class="modal fade" id="modalCategoria21" tabindex="-1" role="dialog" aria-labelledby="modalCategoriaLabel" aria-hidden="true">
+    <div class="modal fade" id="modalCategoria" tabindex="-1" role="dialog" aria-labelledby="modalCategoriaLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -145,6 +169,7 @@
             <th>Precio</th>
             <th>Cantidad</th>
             <th>Total</th>
+            <th>Accion</th>
         </tr>
     </thead>
     <tbody id="cuerpoTabla">
@@ -152,46 +177,116 @@
     </tbody>
 </table>
 
+@*  -----------------               proforma        ----------------------------------------------------*@
+<div class="container mt-5">
 
-<footer>Propiedad ENKI</footer>
+    <div class="row">
+        <!-- <div class="col-md-6 offset-md-3"></div> -->
+        <div class="col-12">
+            <div class="card" id="proformaPedido">
+                <div class="card-body">
+                    <h2 class="text-center mb-4" style="color: #703d6f;">Proforma</h2>
+                    <div class="form-group row ">
+                        <label for="subtotal" class="col-sm-6 col-form-label text-right subtituloPedido">Subtotal:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="subtotal" readonly disabled value="0">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="descuento" class="col-sm-6 col-form-label text-right subtituloPedido">Descuento:</label>
+                        <div class="col-sm-6 ">
+                            <input type="text" class="form-control" id="descuento" value="0">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="total" class="col-sm-6 col-form-label text-right subtituloPedido">Total:</label>
+                        <div class="col-sm-6">
+                            <input  type="text" class="form-control" id="total" readonly disabled value="0">
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group row">
+                        <label for="total" class="col-sm-6 col-form-label text-right subtituloPedido">Adelanto:</label>
+                        <div class="col-sm-6">
+                            <input  type="number" class="form-control" id="adelanto" value="0" required min="1">
+                            
+                        </div>
+                    </div>
+
+                    <div class="botonesPedido">
+                        <button type="button" class="btn btn-outline-success " >Cancelar</button>
+                        <button type="button" class="btn btn-success" onclick="enviarFormulario()">Agregar</button>
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<footer id="footerPedido">
+    Propiedad ENKI</footer>
+
+
 <script>
 
-    <script>
-        $(document).ready(function () {
+    // para actualizar los nombre del cliente y empresa profile
+    function obtenerDatosCliente() {
+        // Obtener el valor seleccionado en el selector de clientes
+        var clienteIdSeleccionado = document.getElementById("categoriaPolera").value;
+
+        // Buscar el cliente correspondiente en la lista de clientes
+        var clientes = @Html.Raw(Json.Serialize(Model.clientes)); // Convertir la lista de clientes a un objeto JavaScript
+        var clienteSeleccionado = clientes.find(cliente => cliente.clienteId === parseInt(clienteIdSeleccionado));
+
+        // Usar la información del cliente para mostrarla o utilizarla en otro div
+        if (clienteSeleccionado) {
+            // Aquí puedes usar la información del cliente como desees
+            console.log("Nombre del cliente: " + clienteSeleccionado.name);
+            console.log("Otro dato del cliente: " + clienteSeleccionado.nameCompany);
+            document.getElementById("nameProfile").textContent = clienteSeleccionado.name;
+            document.getElementById("nameProfileConpany").textContent = clienteSeleccionado.nameCompany;
+        }
+    }
+
+    $(document).ready(function () {
             
-            // Método jQuery para abrir el modal de categoría
-            $("#btnAbrirModalCategoria21").click(function () {
-                $('#modalCategoria21').modal('show');
-            });
+        // Método jQuery para abrir el modal de categoría
+        $("#btnAbrirModalCategoria").click(function () {
+            console.log("entro al click");
+            $('#modalCategoria').modal('show');
+        });
 
-            // Método jQuery para crear categorías dentro del modal
-            $("#btnGuardarCategoria").click(function () {
-                var datos = $("#formCategoria").serialize();
-                console.log(datos);
-                $.ajax({
-                    url: "/Cliente/agregar",
-                    type: "POST",
-                    data: datos,
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.success) {
-                            console.log(response.data);
-                            $('#modalCategoria21').modal('hide');
-                            $("#categoriaPolera").append($("<option></option>").val(response.data.categoriaId).html(response.data.name));
+        // Método jQuery para crear categorías dentro del modal
+        $("#btnGuardarCategoria").click(function () {
+            var datos = $("#formCategoria").serialize();
+            console.log(datos);
+            $.ajax({
+                url: "/Cliente/agregar",
+                type: "POST",
+                data: datos,
+                dataType: "json",
+                success: function (response) {
+                    if (response.success) {
+                        console.log(response.data);
+                        $('#modalCategoria').modal('hide');
+                        $("#categoriaPolera").append($("<option></option>").val(response.data.categoriaId).html(response.data.name));
 
-                        } else {
-                            alert("Ocurrió un error al crear la categoría: " + response.errors);
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        alert("Ocurrió un error al crear la categoría: " + error);
+                    } else {
+                        alert("Ocurrió un error al crear la categoría: " + response.errors);
                     }
-                });
+                },
+                error: function (xhr, status, error) {
+                    alert("Ocurrió un error al crear la categoría: " + error);
+                }
             });
         });
+    });
 </script>
 
-</script>
 <script>
     /*  -------   fecha actual  ---------- */
     // Obtener el elemento de fecha por su ID
@@ -204,11 +299,18 @@
     fechaInput.value = fechaActual;
 
 
+    /* actualizar el total */
+    function calcularDescuento(){
+        var subtotal = document.getElementById("subtotal").value ;
+        var descuento = document.getElementById("descuento").value;
+        var total = subtotal - descuento;
+        document.getElementById("total").value = total;
+    }
 
+    document.getElementById('descuento').addEventListener('input', calcularDescuento);
 
 
     /* aqui termina */
-
 
     function agregarDesdeTarjeta(tarjeta) {
         var da = tarjeta.querySelector("#cantidadS"); //obtiene la etiqueta
@@ -227,27 +329,41 @@
 
     // Función para agregar un producto a la tabla
     function agregarProducto(cantidad, precio, id) {
-        console.log(id + " entró al método");
+        if(cantidad != 0 && precio != 0 )
+        {
+            console.log(id + " entró al método");
 
-        var cuerpoTabla = document.getElementById("cuerpoTabla");
-        var filas = cuerpoTabla.getElementsByTagName("tr");
-        var filaExistente = null;
+            var cuerpoTabla = document.getElementById("cuerpoTabla");
+            var filas = cuerpoTabla.getElementsByTagName("tr");
+            var filaExistente = null;
 
-        for (var i = 0; i < filas.length; i++) {
-            var celdas = filas[i].getElementsByTagName("td");
-            var idEnFila = celdas[0].textContent;
+            for (var i = 0; i < filas.length; i++) {
+                var celdas = filas[i].getElementsByTagName("td");
+                var idEnFila = celdas[0].textContent;
 
-            if (idEnFila === id) {
-                filaExistente = filas[i];
-                break;
+                if (idEnFila === id) {
+                    filaExistente = filas[i];
+                    break;
+                }
             }
-        }
 
-        if (filaExistente) {
-            actualizarFilaExistente(filaExistente, cantidad, precio);
-        } else {
-            agregarNuevaFila(cuerpoTabla, id, cantidad, precio);
+            if (filaExistente) {
+                actualizarFilaExistente(filaExistente, cantidad, precio);
+            } else {
+                agregarNuevaFila(cuerpoTabla, id, cantidad, precio);
+            }
+
+            var tem = obtenerSaldo();
+            console.log("Aqui esta afuera damaris" + obtenerSaldo());
+            document.getElementById("subtotal").value = obtenerSaldo();
+            calcularDescuento();
+        
         }
+        else{
+            alert("Ingrese un valor distinto a 0");
+        }
+        
+        
     }
 
     function actualizarFilaExistente(fila, cantidad, precio) {
@@ -268,14 +384,29 @@
         var total = parseInt(cantidad) * parseInt(precio);
         crearYAgregarCelda(nuevaFila, total);
 
+        var eliminarBtn = document.createElement("button");
+        eliminarBtn.textContent = "Eliminar";
+        eliminarBtn.onclick = function () {
+            cuerpoTabla.removeChild(nuevaFila);
+            document.getElementById("subtotal").value = obtenerSaldo();
+            calcularDescuento();
+            
+        };
+
+        var cell1 = document.createElement("td");
+        cell1.appendChild(eliminarBtn); // Agregar el botón a la celda
+
+        nuevaFila.appendChild(cell1);
         cuerpoTabla.appendChild(nuevaFila);
     }
 
+    /* crea la celda y asigna el valor nuevo que llega */
     function crearYAgregarCelda(fila, contenido) {
         var celda = document.createElement("td");
         celda.textContent = contenido;
-        fila.appendChild(celda);
+        fila.appendChild(celda); /* agrega la celda a la fila tr */
     }
+
 
     function obtenerDatosTablaComoJson() {
         var tabla = document.getElementById("tablaProductos");
@@ -297,11 +428,31 @@
 
         return JSON.stringify(datos);
     }
+    function obtenerSaldo() {
+        var contadorSaldo = 0;
+        var tabla = document.getElementById("tablaProductos");
+        var filas = tabla.getElementsByTagName("tr");
+        var datos = [];
 
+        for (var i = 1; i < filas.length; i++) { // Empezamos desde 1 para omitir el encabezado
+            var celdas = filas[i].getElementsByTagName("td");
+            console.log("Aqui es bucle" + celdas[4].textContent);
+            contadorSaldo += parseInt(celdas[4].textContent);
+        }
+
+        return contadorSaldo;
+    }
 
     function enviarFormulario() {
         var datosJson = JSON.stringify(obtenerDatosTablaComoJson());
         document.getElementById("listaObjetos").value = datosJson;
+        var descuento = document.getElementById("descuento").value;
+
+        document.getElementById("montoF").value = document.getElementById("subtotal").value;
+        document.getElementById("montoTotalF").value = document.getElementById("total").value;
+        document.getElementById("descuentoPedido").value = descuento;
+        document.getElementById("acuentaF").value = document.getElementById("adelanto").value;
+
         document.getElementById("formularioStock").submit();
     }
     

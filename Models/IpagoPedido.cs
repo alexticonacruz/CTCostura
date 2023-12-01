@@ -4,5 +4,6 @@
     {
         void agregar(pagoPedido newPago);
         IEnumerable<pagoPedido> GetPedidos { get; }
+        decimal ultimoPago(int id);
     }
 }

@@ -11,28 +11,29 @@ namespace SistemaCos_001.Controllers
         private readonly IProductoRepository _productoRepository;
         private readonly IPedidoRepository _pedidoRepository;
         private readonly IClienteRepository _clienteRepository;
-        public PedidoController(IProductoRepository productoRepository, IPedidoRepository pedidoRepository, IClienteRepository clienteRepository )
+        private readonly IpagoPedido _pagoPedidoRepository;
+        public PedidoController(IProductoRepository productoRepository, IPedidoRepository pedidoRepository, IClienteRepository clienteRepository,IpagoPedido pagoPedidoRepository )
         {
             _pedidoRepository = pedidoRepository;
             _productoRepository = productoRepository;
             _clienteRepository = clienteRepository;
+            _pagoPedidoRepository  = pagoPedidoRepository;
         }
         public IActionResult Index()
         {
-            string jsonString = "[{\"id\":\"2\",\"nombre\":\"Nombre del producto\",\"precio\":\"2\",\"cantidad\":\"1\",\"total\":\"2\"},{\"id\":\"3\",\"nombre\":\"Nombre del producto\",\"precio\":\"34\",\"cantidad\":\"2\",\"total\":\"68\"}]";
-            var listaProductos = JsonConvert.DeserializeObject<List<DetallePedido>>(jsonString);
-
-            foreach (var producto in listaProductos)
+            
+            var model = new PedidoViewModel
             {
-                // Trabajar con cada objeto (producto)
-            }
-            var newPedido = new Pedido();
-            var datos = _clienteRepository.GetAll;
-            var model = new PedidoViewModel(_productoRepository.AllProductos,newPedido, new Cliente(), datos);
+                productos = _productoRepository.AllProductos,
+                newPedido = new Pedido(),
+                newCliente = new Cliente(),
+                clientes = _clienteRepository.GetAll,
+                newPago = new pagoPedido()
+            };
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Agregar(PedidoViewModel model)
+        public  IActionResult Agregar(PedidoViewModel model)
         {
             try
             {
@@ -44,7 +45,6 @@ namespace SistemaCos_001.Controllers
 
                 // Eliminar la última comilla doble
                 dato = dato.Substring(0, dato.Length - 1);
-                var totalSaldo = 0;
                 var lista = new List<DetallePedido>();
                 Console.WriteLine(dato);
                 var listaObjetos = JsonConvert.DeserializeObject<List<DetallePedido>>(dato);
@@ -56,22 +56,31 @@ namespace SistemaCos_001.Controllers
                         cantidad = producto.cantidad,
                         total = producto.total,
                     };
-                    totalSaldo += objeto.total;
                     lista.Add(objeto);
                 }
                 model.newPedido.DetallePedidos = lista;
-                model.newPedido.montoTotal = totalSaldo;
-                model.newPedido.monto = totalSaldo;
+
+
                 _pedidoRepository.agregar(model.newPedido);
+
+                var se = 5;
+                // registra el primer pago 
+
+                model.newPago.saldo = model.newPedido.montoTotal - model.newPago.acuenta;
+                model.newPago.total = model.newPedido.montoTotal;
+                model.newPago.pedidoId = model.newPedido.pedidoId;
+                _pagoPedidoRepository.agregar(model.newPago);
+
+
                 return RedirectToAction("crear","pagoPedido");
             }
             catch (Exception ex)
             {
                 // Manejo de la excepción
                 Console.WriteLine("Error al deserializar el JSON: " + ex.Message);
+                return  RedirectToAction ("index");
             }
 
-            return View(model);
         }
     }
 }
